@@ -3,6 +3,7 @@
 #include "Utilities/FolderUtilities.h"
 #include "Utilities/VirtualFile.h"
 #include "Utilities/ZipReader.h"
+#include "Utilities/Serializer.h"
 #include "Shared/Emulator.h"
 #include "Shared/Movies/MovieManager.h"
 #include "Shared/Movies/MesenMovie.h"
@@ -21,6 +22,13 @@ void MovieManager::Record(RecordMovieOptions options)
 	shared_ptr<MovieRecorder> recorder(new MovieRecorder(_emu));
 	if(recorder->Record(options)) {
 		_recorder.reset(recorder);
+	}
+}
+
+void MovieManager::Serialize(Serializer& s)
+{
+	if(Recording()) {
+		SV(_recorder);
 	}
 }
 

@@ -907,6 +907,7 @@ void Emulator::Serialize(ostream& out, bool includeSettings, int compressionLeve
 	if(includeSettings) {
 		SV(_settings);
 	}
+	SV(_movieManager);
 	s.Stream(_console, "");
 	s.SaveTo(out, compressionLevel);
 }
@@ -921,6 +922,8 @@ DeserializeResult Emulator::Deserialize(istream& in, uint32_t fileFormatVersion,
 	if(includeSettings) {
 		SV(_settings);
 	}
+
+	SV(_movieManager);
 
 	if(srcConsoleType.has_value() && srcConsoleType.value() != _console->GetConsoleType()) {
 		//Used to allow save states taken on GB/GBC/SGB to be loaded on any of the 3 systems

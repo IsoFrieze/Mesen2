@@ -77,6 +77,14 @@ bool MovieRecorder::Record(RecordMovieOptions options)
 	}
 }
 
+void MovieRecorder::Serialize(Serializer& s)
+{
+	string str = _inputData.str();
+	s.Stream(str, "_inputData");
+	_inputData = stringstream();
+	_inputData << str;
+}
+
 void MovieRecorder::GetGameSettings(stringstream &out)
 {
 	EmuSettings* settings = _emu->GetSettings();

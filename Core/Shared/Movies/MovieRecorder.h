@@ -7,11 +7,12 @@
 #include "Shared/BatteryManager.h"
 #include "Shared/RewindData.h"
 #include "Shared/Movies/MovieTypes.h"
+#include "Utilities/ISerializable.h"
 
 class ZipWriter;
 class Emulator;
 
-class MovieRecorder final : public INotificationListener, public IInputRecorder, public IBatteryRecorder, public IBatteryProvider, public std::enable_shared_from_this<MovieRecorder>
+class MovieRecorder final : public ISerializable, public INotificationListener, public IInputRecorder, public IBatteryRecorder, public IBatteryProvider, public std::enable_shared_from_this<MovieRecorder>
 {
 private:
 	static const uint32_t MovieFormatVersion = 2;
@@ -34,6 +35,8 @@ private:
 public:
 	MovieRecorder(Emulator* emu);
 	virtual ~MovieRecorder();
+
+	void Serialize(Serializer& s);
 
 	bool Record(RecordMovieOptions options);
 	bool Stop();

@@ -204,7 +204,7 @@ bool SaveStateManager::LoadState(istream &stream)
 		if(result == DeserializeResult::Success) {
 			//Stop any movie that might have been playing/recording if a state is loaded
 			//(Note: Loading a state is disabled in the UI while a movie is playing/recording)
-			_emu->GetMovieManager()->Stop();
+			//_emu->GetMovieManager()->Stop();
 
 			if(_emu->IsPaused() && !_emu->GetVideoRenderer()->IsRecording()) {
 				//Only send the saved frame if the emulation is paused and no avi recording is in progress

@@ -1,5 +1,6 @@
 #pragma once
 #include "pch.h"
+#include "Utilities/ISerializable.h"
 #include "Shared/MessageManager.h"
 #include "Shared/Interfaces/IInputProvider.h"
 #include "Shared/Movies/MovieTypes.h"
@@ -19,7 +20,7 @@ public:
 	virtual bool IsPlaying() = 0;
 };
 
-class MovieManager
+class MovieManager : public ISerializable
 {
 private:
 	Emulator* _emu = nullptr;
@@ -28,6 +29,7 @@ private:
 
 public:
 	MovieManager(Emulator* emu);
+	void Serialize(Serializer& s);
 
 	void Record(RecordMovieOptions options);
 	void Play(VirtualFile file, bool silent = false);
